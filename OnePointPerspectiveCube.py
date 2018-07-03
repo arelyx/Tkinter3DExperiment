@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from tkinter import *
+import tkinter as tk
 
 class PerspectiveCube:
     def __init__(self, canvas):
@@ -38,13 +38,17 @@ class PerspectiveCube:
         self.canvas.coords(self.polygons[2], x5, y5, x1, y1, x1+100, y1, x7, y7)
         self.canvas.coords(self.polygons[3], x2,y2,x1+100,y1,x7,y7, x4, y4)
 
-tk = Tk()
-tk.title("OnePointPerspectiveCube")
-tk.configure(background='black')
-label = Label(text = "Click and Drag to See the Shape",background='black',foreground='white')
-label.pack()
-canvas = Canvas(width=600, height=600, bg='black')
-canvas.pack()
-x = PerspectiveCube(canvas)
-tk.mainloop()
+def main():
+    root = tk.Tk()
+    root.title("OnePointPerspectiveCube")
+    root.configure(background='black')
+    label = tk.Label(text = "Click and Drag to See the Shape",background='black',foreground='white')
+    label.pack()
+    canvas = tk.Canvas(width=600, height=600, bg='black')
+    canvas.pack()
+    x = PerspectiveCube(canvas)
+    root.mainloop()
+
+if __name__ == '__main__':
+    main()
 
