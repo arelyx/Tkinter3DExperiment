@@ -5,6 +5,7 @@ from tkinter import ttk
 from itertools import cycle
 from random import randint
 
+BOX_SIZE = 35
 COLORS = cycle(['red', 'blue', 'green', 'magenta', 'yellow'])
 class PerspectiveCube:
     def __init__(self, canvas):
@@ -16,8 +17,8 @@ class PerspectiveCube:
             self.canvas.tag_bind(p, "<B1-Motion>", self._on_clickndrag)
             self.polygons.append(p)
         self.update_screen(
-            randint(50, canvas.winfo_width()),
-            randint(50, canvas.winfo_height())) #initial point
+            randint(BOX_SIZE, canvas.winfo_width()),
+            randint(BOX_SIZE, canvas.winfo_height())) #initial point
 
     def _on_clickndrag(self, event):
         self.update_screen(event.x, event.y)
@@ -30,25 +31,25 @@ class PerspectiveCube:
             self.y = y
         half_width = self.canvas.winfo_width() / 2
         half_height = self.canvas.winfo_height() / 2
-        x1 = self.x-50
-        y1 = self.y-50
-        x2 = self.x+50
-        y2 = self.y+50
+        x1 = self.x-BOX_SIZE
+        y1 = self.y-BOX_SIZE
+        x2 = self.x+BOX_SIZE
+        y2 = self.y+BOX_SIZE
         x3 = (half_width+x1)/2
         y3 = (half_height+y2)/2
-        x4 = (half_width+x1+100)/2
+        x4 = (half_width+x1+BOX_SIZE*2)/2
         y4 = (half_height+y2)/2
         x5 = (half_width+x1)/2
         y5 = (half_height+y1)/2
         x6 = (half_width+x1)/2
         y6 = (half_height+y2)/2
-        x7 = (half_width+x1+100)/2
+        x7 = (half_width+x1+BOX_SIZE*2)/2
         y7 = (half_height+y1)/2
 
-        self.canvas.coords(self.polygons[0], x3, y3, x4, y4, x2, y2, x2 - 100, y2)
-        self.canvas.coords(self.polygons[1], x5, y5, x6, y6, x2 - 100, y2, x1, y1)
-        self.canvas.coords(self.polygons[2], x5, y5, x1, y1, x1+100, y1, x7, y7)
-        self.canvas.coords(self.polygons[3], x2,y2,x1+100,y1,x7,y7, x4, y4)
+        self.canvas.coords(self.polygons[0], x3, y3, x4, y4, x2, y2, x2 - BOX_SIZE*2, y2)
+        self.canvas.coords(self.polygons[1], x5, y5, x6, y6, x2 - BOX_SIZE*2, y2, x1, y1)
+        self.canvas.coords(self.polygons[2], x5, y5, x1, y1, x1+BOX_SIZE*2, y1, x7, y7)
+        self.canvas.coords(self.polygons[3], x2,y2,x1+BOX_SIZE*2,y1,x7,y7, x4, y4)
 
 class PerspectiveCanvas(tk.Frame):
     def __init__(self, master=None, **kwargs):
