@@ -3,6 +3,7 @@
 import tkinter as tk
 from tkinter import ttk
 from itertools import cycle
+from random import randint
 
 COLORS = cycle(['red', 'blue', 'green', 'magenta', 'yellow'])
 class PerspectiveCube:
@@ -15,7 +16,7 @@ class PerspectiveCube:
             self.canvas.tag_bind(p, "<B1-Motion>", self._on_clickndrag)
             self.polygons.append(p)
         self.canvas.tag_bind(self.polygons, "<B1-Motion>", self._on_clickndrag)
-        self.update_screen(200, 200) #initial point
+        self.update_screen(randint(50, 550), randint(50, 550)) #initial point
 
     def _on_clickndrag(self, event):
         self.update_screen(event.x, event.y)
